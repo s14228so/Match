@@ -10,8 +10,14 @@
       <div class="matchingList">
         <% @match_users.each do |user| %>
           <div class="matchingPerson">
-          <div class="matchingPerson_img"><%= image_tag user.img_name %></div>
+          <div class="matchingPerson_img"><%= image_tag user.img_name.url %></div>
             <div class="matchingPerson_name"><%= user.name %></div>
+            <!-- 以下のコードを追加する -->
+            <%= form_tag :chat_index, method: :post do %>
+              <input name="user_id" type="hidden" value="<%= user.id %>" />
+              <%= submit_tag 'チャットを開く', class: "chatForm_btn" %>
+            <% end %>
+            <!-- ここまで -->
           </div>
         <% end %>
       </div>
